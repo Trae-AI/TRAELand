@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="马年庙会">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>马年庙会</title>
+    <style>
+        :root {
+            --scale-factor: 1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            outline: none;
+        }
+        
+        input, textarea {
+            user-select: auto;
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+        }
+        
+        html {
+            touch-action: manipulation;
+        }
+        
+        body {
+            background: #1a1a2e;
+            overflow: hidden;
+            font-family: 'Microsoft YaHei', sans-serif;
+            touch-action: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        #login-screen.hidden {
+            display: none;
+        }
+        
+        #login-title {
+            font-size: 48px;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(100, 150, 255, 0.5);
+        }
+        
+        #login-subtitle {
+            font-size: 18px;
+            color: #aaa;
+            margin-bottom: 40px;
+        }
+        
+        #login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 300px;
+            max-width: 90vw;
+        }
+        
+        #nickname-input {
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        #nickname-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        #nickname-input:focus {
+            border-color: #4a90d9;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(74, 144, 217, 0.3);
+        }
+        
+        #login-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(74, 144, 217, 0.4);
+        }
+        
+        #login-btn:active {
+            transform: translateY(0);
+        }
+        
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #game-ui.hidden {
+            display: none;
+        }
+        
+        #camera-select {
+            position: absolute;
+            top: calc(env(safe-area-inset-top) + 8px);
+            right: calc(env(safe-area-inset-right) + 8px);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 21px;
+            letter-spacing: 0.05em;
+            z-index: 200;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            outline: none;
+            width: calc(100vh / 4);
+            min-width: 300px;
+            max-width: 500px;
+            box-sizing: border-box;
+        }
+        
+        #camera-select:hover {
+            border-color: #4a90d9;
+            background: rgba(0, 0, 0, 0.9);
+        }
+        
+        #camera-select option {
+            background: #1a1a2e;
+            color: white;
+        }
+        
+        #money-display {
+            position: absolute;
+            top: calc(env(safe-area-inset-top) + 65px);
+            right: calc(env(safe-area-inset-right) + 8px);
+            background: rgba(0, 0, 0, 0.7);
+            color: #ffd700;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 21px;
+            letter-spacing: 0.05em;
+            font-weight: bold;
+            z-index: 200;
+            width: calc(100vh / 4);
+            min-width: 300px;
+            max-width: 500px;
+            box-sizing: border-box;
+        }
+        
+        #money-display.hidden {
+            display: none;
+        }
+        
+        #diary-display {
+            position: absolute;
+            top: calc(env(safe-area-inset-top) + 120px);
+            right: calc(env(safe-area-inset-right) + 8px);
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 6px;
+            z-index: 200;
+            width: calc(100vh / 4);
+            min-width: 300px;
+            max-width: 500px;
+            max-height: calc(50vh);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #diary-display.hidden {
+            display: none;
+        }
+        
+        #diary-display #diary-title {
+            font-size: 22.5px;
+            letter-spacing: 0.05em;
+            color: #ffd700;
+            font-weight: bold;
+            padding: 4px 6px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        #diary-display #diary-content {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 4px 6px;
+            max-height: calc(45vh);
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
+        }
+        
+        #diary-display #diary-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        #diary-display #diary-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 2px;
+        }
+        
+        #diary-display #diary-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.5);
+            border-radius: 2px;
+        }
+        
+        #diary-display #diary-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 215, 0, 0.7);
+        }
+        
+        #diary-display .diary-entry {
+            color: #ffffff;
+            font-size: 18px;
+            letter-spacing: 0.05em;
+            line-height: 1.5;
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        #diary-display .diary-entry:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        #diary-display .diary-empty {
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            padding: 10px 0;
+            font-size: 18px;
+            letter-spacing: 0.05em;
+        }
+        
+        #queue-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        #queue-screen.active {
+            display: flex;
+        }
+        
+        #queue-title {
+            font-size: 48px;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(100, 150, 255, 0.5);
+        }
+        
+        #queue-subtitle {
+            font-size: 18px;
+            color: #aaa;
+            margin-bottom: calc(40px * var(--ui-scale));
+        }
+        
+        #queue-info {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: calc(15px * var(--ui-scale));
+            padding: calc(30px * var(--ui-scale)) calc(50px * var(--ui-scale));
+            text-align: center;
+        }
+        
+        #queue-position {
+            font-size: 72px;
+            font-weight: bold;
+            color: #4a90d9;
+            margin-bottom: calc(10px * var(--ui-scale));
+        }
+        
+        #queue-label {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        
+        #queue-total {
+            font-size: 18px;
+            color: #aaa;
+        }
+        
+        #queue-hint {
+            margin-top: calc(30px * var(--ui-scale));
+            font-size: 14px;
+            color: #888;
+        }
+        
+        #kongming-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 500;
+        }
+        
+        #kongming-modal.active {
+            display: flex;
+        }
+        
+        #kongming-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        #kongming-title {
+            font-size: 28px;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        #kongming-input {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 18px;
+            outline: none;
+            resize: none;
+            margin-bottom: 20px;
+        }
+        
+        #kongming-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        #kongming-input:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        #kongming-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .kongming-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #kongming-cancel {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        #kongming-cancel:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        #kongming-send {
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+            color: #1a1a2e;
+        }
+        
+        #kongming-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        #firework-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 500;
+        }
+        
+        #firework-modal.active {
+            display: flex;
+        }
+        
+        #firework-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        #firework-title {
+            font-size: 28px;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        #firework-input {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            resize: none;
+            margin-bottom: 20px;
+        }
+        
+        #firework-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        #firework-input:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        #firework-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .firework-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #firework-cancel {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        #firework-cancel:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        #firework-send {
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+            color: #1a1a2e;
+        }
+        
+        #firework-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        #error-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+        
+        #error-modal.active {
+            display: flex;
+        }
+        
+        #error-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 3px solid #ff6b6b;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        #error-title {
+            font-size: 28px;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        #error-text {
+            font-size: 18px;
+            color: #ffffff;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        #error-close {
+            padding: 12px 40px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #error-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+        }
+        
+        .dialogue-bubble {
+            position: absolute;
+            max-width: 100px;
+            padding: 4px 6px;
+            border-radius: 6px;
+            font-size: 10px;
+            line-height: 1.2;
+            z-index: 10000;
+            animation: bubbleFadeIn 0.3s ease-out;
+            word-wrap: break-word;
+        }
+        
+        @keyframes bubbleFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .npc-bubble {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            color: white;
+            border: 2px solid #ff4757;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        .npc-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #ff6b6b;
+        }
+        
+        .player-bubble {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            border: 2px solid #2e6da4;
+            box-shadow: 0 4px 15px rgba(74, 144, 217, 0.4);
+        }
+        
+        .player-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #4a90d9;
+        }
+        
+        #chat-bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .chat-bubble {
+            position: absolute;
+            max-width: 200px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            line-height: 1.4;
+            z-index: 10000;
+            animation: bubbleFadeIn 0.3s ease-out;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            border: 2px solid #2e6da4;
+            box-shadow: 0 4px 15px rgba(74, 144, 217, 0.4);
+            transform: translateX(-50%);
+            text-shadow: 
+                -1px -1px 0 #000,  
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        
+        .chat-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #4a90d9;
+        }
+
+        @media (max-width: 768px) {
+            #camera-select,
+            #money-display,
+            #diary-display {
+                width: 33.33vw !important;
+                min-width: auto !important;
+                max-width: none !important;
+            }
+            
+            #camera-select {
+                top: calc(env(safe-area-inset-top) + 5px);
+                padding: 4px 8px;
+            }
+            
+            #money-display {
+                top: calc(env(safe-area-inset-top) + 40px);
+                padding: 3px 6px;
+            }
+            
+            #diary-display {
+                top: calc(env(safe-area-inset-top) + 70px);
+            }
+            
+            #camera-select,
+            #money-display,
+            #diary-display #diary-title {
+                font-size: calc(33.33vw / 20);
+            }
+            
+            #diary-display .diary-entry,
+            #diary-display .diary-empty {
+                font-size: calc(33.33vw / 22);
+            }
+            
+            #login-title,
+            #queue-title {
+                font-size: 36px;
+            }
+            
+            #queue-position {
+                font-size: 54px;
+            }
+            
+            #queue-label {
+                font-size: 18px;
+            }
+            
+            #queue-total {
+                font-size: 12px;
+            }
+            
+            #queue-hint {
+                font-size: 11px;
+            }
+            
+            #kongming-title {
+                font-size: 21px;
+            }
+            
+            #kongming-input,
+            .kongming-btn {
+                font-size: 12px;
+            }
+            
+            #restart-hint {
+                font-size: 12px;
+                padding: 6px 12px;
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #camera-select,
+            #money-display,
+            #diary-display {
+                width: 33.33vw !important;
+                min-width: auto !important;
+                max-width: none !important;
+            }
+            
+            #camera-select {
+                top: calc(env(safe-area-inset-top) + 5px);
+                padding: 4px 8px;
+            }
+            
+            #money-display {
+                top: calc(env(safe-area-inset-top) + 40px);
+                padding: 3px 6px;
+            }
+            
+            #diary-display {
+                top: calc(env(safe-area-inset-top) + 70px);
+            }
+            
+            #camera-select,
+            #money-display,
+            #diary-display #diary-title {
+                font-size: calc(33.33vw / 20);
+            }
+            
+            #diary-display .diary-entry,
+            #diary-display .diary-empty {
+                font-size: calc(33.33vw / 22);
+            }
+            
+            #login-title,
+            #queue-title {
+                font-size: 28px;
+            }
+            
+            #queue-position {
+                font-size: 42px;
+            }
+            
+            #queue-label {
+                font-size: 14px;
+            }
+            
+            #queue-total {
+                font-size: 10px;
+            }
+            
+            #queue-hint {
+                font-size: 9px;
+            }
+            
+            #kongming-title {
+                font-size: 18px;
+            }
+            
+            #kongming-input,
+            .kongming-btn {
+                font-size: 10px;
+            }
+            
+            #restart-hint {
+                font-size: 10px;
+                padding: 4px 8px;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="login-screen" class="hidden">
+        <h1 id="login-title">马年庙会</h1>
+        <p id="login-subtitle">New Year Temple Fair</p>
+        <form id="login-form">
+            <input type="text" id="nickname-input" placeholder="请输入你的昵称" maxlength="20" />
+            <button type="submit" id="login-btn">逛庙会去</button>
+        </form>
+    </div>
+    
+    <div id="queue-screen" class="hidden">
+        <h1 id="queue-title">排队中...</h1>
+        <p id="queue-subtitle">庙会太热闹了，请稍等片刻</p>
+        <div id="queue-info">
+            <div id="queue-position">1</div>
+            <div id="queue-label">你的顺位</div>
+            <div id="queue-total">当前排队人数: 1</div>
+        </div>
+        <p id="queue-hint">请不要关闭页面，轮到你时会自动进入游戏</p>
+    </div>
+    
+    <div id="game-container">
+        <div id="game-ui" class="hidden">
+            <select id="camera-select">
+                <option value="free">自由镜头</option>
+            </select>
+            <div id="money-display" class="hidden">金钱: 200元</div>
+            <div id="diary-display" class="hidden">
+                <div id="diary-title">角色日记</div>
+                <div id="diary-content"></div>
+            </div>
+        </div>
+        <div id="chat-bubbles"></div>
+    </div>
+    
+    <div id="kongming-modal">
+        <div id="kongming-box">
+            <div id="kongming-title">放飞孔明灯</div>
+            <textarea id="kongming-input" placeholder="写下你的祝福语..."></textarea>
+            <div id="kongming-buttons">
+                <button id="kongming-cancel" class="kongming-btn">取消</button>
+                <button id="kongming-send" class="kongming-btn">放飞</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="firework-modal">
+        <div id="firework-box">
+            <div id="firework-title">放烟花</div>
+            <textarea id="firework-input" placeholder="写下你的祝福语..."></textarea>
+            <div id="firework-buttons">
+                <button id="firework-cancel" class="firework-btn">取消</button>
+                <button id="firework-send" class="firework-btn">燃放</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="fade-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: black; opacity: 0; z-index: 9999; pointer-events: none; transition: opacity 1s ease-in-out;"></div>
+    
+    <div id="blessing-modal" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: none; justify-content: center; align-items: center; z-index: 10001;">
+        <div id="blessing-box" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 3px solid #ffd700; border-radius: 20px; padding: 30px; max-width: 500px; width: 90%; display: flex; gap: 20px; align-items: flex-start;">
+            <div id="blessing-avatar-container" style="flex-shrink: 0; width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 3px solid #ffd700; display: none;">
+                <img id="blessing-avatar" src="" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="flex: 1;">
+                <div id="blessing-title" style="font-size: 28px; color: #ffd700; text-align: center; margin-bottom: 20px; font-weight: bold;">孔明灯祝福语</div>
+                <div id="blessing-nickname" style="font-size: 16px; color: #ffd700; text-align: center; margin-bottom: 15px; font-weight: bold;"></div>
+                <div id="blessing-text" style="font-size: 18px; color: #ffffff; text-align: center; word-wrap: break-word; margin-bottom: 20px;"></div>
+                <div id="blessing-hint" style="font-size: 14px; color: rgba(255, 255, 255, 0.6); text-align: center;">点击任意处关闭</div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="error-modal">
+        <div id="error-box">
+            <div id="error-title">提示</div>
+            <div id="error-text"></div>
+            <button id="error-close">确定</button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+        
+        document.addEventListener('gesturechange', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+        
+        document.addEventListener('gestureend', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+        
+        document.addEventListener('touchstart', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+    <button id="kongming-exit-btn" style="position: fixed; top: 20px; right: 20px; width: 50px; height: 50px; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 10px; background: rgba(0, 0, 0, 0.7); color: white; font-size: 24px; cursor: pointer; display: none; align-items: center; justify-content: center; z-index: 10002; transition: all 0.3s; user-select: none; -webkit-tap-highlight-color: transparent;">✕</button>
+    <div id="restart-hint">点击任意键重启庙会</div>
+    <style>
+        #kongming-exit-btn:hover {
+            background: rgba(74, 144, 217, 0.7);
+            border-color: #4a90d9;
+            transform: scale(1.1);
+        }
+        #kongming-exit-btn:active {
+            transform: scale(0.95);
+        }
+        
+        #restart-hint {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px 40px;
+            border-radius: 15px;
+            border: 3px solid #ffd700;
+            z-index: 10001;
+            display: none;
+            animation: blink 1s ease-in-out infinite;
+            pointer-events: auto;
+        }
+        
+        #restart-hint.active {
+            display: block;
+        }
+        
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
+            }
+            50% {
+                opacity: 0.5;
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+            }
+        }
+    </style>
+    
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.90.0/dist/phaser.min.js"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    
+    <audio id="kongming-sound" src="/assets/kongming/sound.wav" preload="auto"></audio>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

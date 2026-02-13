@@ -1,0 +1,98 @@
+{
+  "npcs": [
+    {
+      "name": "老村长",
+      "filename": "village_head",
+      "type": "pinned",
+      "position": { "x": 30, "y": 53 }
+    },
+    {
+      "name": "王大妈",
+      "filename": "aunt_wang",
+      "type": "pinned",
+      "position": { "x": 13, "y": 14 }
+    },
+    {
+      "name": "钱老板",
+      "filename": "boss_qian",
+      "type": "pinned",
+      "position": { "x": 54, "y": 14 }
+    },
+    {
+      "name": "泥人张",
+      "filename": "uncle_zhao",
+      "type": "pinned",
+      "position": { "x": 40, "y": 35 }
+    },
+    {
+      "name": "李百万",
+      "filename": "boss_qian",
+      "type": "pinned",
+      "position": { "x": 15, "y": 35 }
+    },
+    {
+      "name": "万兽王",
+      "filename": "teacher_zhang",
+      "type": "pinned",
+      "position": { "x": 52, "y": 35 }
+    },
+    {
+      "name": "王婆",
+      "filename": "aunt_wang_po",
+      "type": "pinned",
+      "position": { "x": 43, "y": 14 }
+    },
+    {
+      "name": "爆竹秦",
+      "filename": "firework_owner",
+      "type": "pinned",
+      "position": { "x": 33, "y": 27 }
+    },
+    {
+      "name": "郎百货",
+      "filename": "department_store_owner",
+      "type": "pinned",
+      "position": { "x": 23, "y": 14 }
+    },
+    {
+      "name": "阿凡提",
+      "filename": "afanti",
+      "type": "pinned",
+      "position": { "x": 25, "y": 35 }
+    },
+    {
+      "name": "孔明灯使者",
+      "filename": "kongming_messenger",
+      "type": "pinned",
+      "position": { "x": 33, "y": 10 }
+    }
+  ],
+  "animation": {
+    "idle": {
+      "frames": 6,
+      "fps": 7,
+      "loop": true
+    },
+    "special": {
+      "frames": 6,
+      "fps": 9,
+      "loop": false
+    },
+    "idleCyclesBeforeSpecial": 3,
+    "specialChance": 0.3
+  },
+  "frame": {
+    "width": 100,
+    "height": 100,
+    "anchor": { "x": 0.5, "y": 0.7 }
+  },
+  "spritesheet": {
+    "totalWidth": 300,
+    "totalHeight": 400,
+    "rows": 4,
+    "cols": 3,
+    "frameWidth": 100,
+    "frameHeight": 100,
+    "noSpacing": true
+  }
+}

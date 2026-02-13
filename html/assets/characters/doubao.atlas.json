@@ -1,0 +1,167 @@
+{
+  "frames": [
+    {
+      "filename": "down.step1",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 0,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "down.stand",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 100,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "down.step2",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 200,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "left.step1",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 0,
+        "y": 100
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "left.stand",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 100,
+        "y": 100
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "left.step2",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 200,
+        "y": 100
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "right.step1",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 0,
+        "y": 200
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "right.stand",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 100,
+        "y": 200
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "right.step2",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 200,
+        "y": 200
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "up.step1",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 0,
+        "y": 300
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "up.stand",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 100,
+        "y": 300
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "up.step2",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 200,
+        "y": 300
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    }
+  ],
+  "config": {
+    "noSpacing": false,
+    "totalWidth": 300,
+    "totalHeight": 400,
+    "frameWidth": 100,
+    "frameHeight": 100
+  }
+}

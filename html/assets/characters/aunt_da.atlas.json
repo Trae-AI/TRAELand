@@ -1,0 +1,167 @@
+{
+  "frames": [
+    {
+      "filename": "idle.000",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 0,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "idle.001",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 100,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "idle.002",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 200,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "idle.003",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 0,
+        "y": 100
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "idle.004",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 100,
+        "y": 100
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "idle.005",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 200,
+        "y": 100
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "special.000",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 0,
+        "y": 200
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "special.001",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 100,
+        "y": 200
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "special.002",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 200,
+        "y": 200
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "special.003",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 0,
+        "y": 300
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "special.004",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 100,
+        "y": 300
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "special.005",
+      "frame": {
+        "w": 100,
+        "h": 100,
+        "x": 200,
+        "y": 300
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    }
+  ],
+  "config": {
+    "noSpacing": true,
+    "totalWidth": 300,
+    "totalHeight": 400,
+    "frameWidth": 100,
+    "frameHeight": 100
+  }
+}

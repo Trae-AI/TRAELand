@@ -1,0 +1,323 @@
+{
+  "frames": [
+    {
+      "filename": "down.step1",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 0,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "down.stand",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 67,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "down.step2",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 134,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "down.idle1",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 201,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "down.idle2",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 268,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "down.idle3",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 335,
+        "y": 0
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "left.step1",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 0,
+        "y": 67
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "left.stand",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 67,
+        "y": 67
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "left.step2",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 134,
+        "y": 67
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "left.idle1",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 201,
+        "y": 67
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "left.idle2",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 268,
+        "y": 67
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "left.idle3",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 335,
+        "y": 67
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "right.step1",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 0,
+        "y": 134
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "right.stand",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 67,
+        "y": 134
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "right.step2",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 134,
+        "y": 134
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "right.idle1",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 201,
+        "y": 134
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "right.idle2",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 268,
+        "y": 134
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "right.idle3",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 335,
+        "y": 134
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "up.step1",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 0,
+        "y": 201
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "up.stand",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 67,
+        "y": 201
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "up.step2",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 134,
+        "y": 201
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "up.idle1",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 201,
+        "y": 201
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "up.idle2",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 268,
+        "y": 201
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    },
+    {
+      "filename": "up.idle3",
+      "frame": {
+        "w": 67,
+        "h": 67,
+        "x": 335,
+        "y": 201
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.7
+      }
+    }
+  ],
+  "config": {
+    "noSpacing": false,
+    "totalWidth": 402,
+    "totalHeight": 268,
+    "frameWidth": 67,
+    "frameHeight": 67
+  }
+}
